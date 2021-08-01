@@ -82,6 +82,10 @@ render(
 );
 ```
 
+## Roadmap
+
+-   [ ] [`SubmitEvent` class in TypeScript][7]
+
 ## Acknowledge
 
 We rewrite the source code based on [Tobias Buschor's answer in StackOverflow][6].
@@ -92,3 +96,4 @@ We rewrite the source code based on [Tobias Buschor's answer in StackOverflow][6
 [4]: https://www.jsdelivr.com/package/npm/event-submitter-polyfill
 [5]: https://nodei.co/npm/event-submitter-polyfill/
 [6]: https://stackoverflow.com/a/61110260
+[7]: https://github.com/microsoft/TypeScript/issues/40811
