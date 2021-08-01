@@ -1,0 +1,17 @@
+{
+  "name": "event-submitter-polyfill",
+  "version": "0.1.0",
+  "description": "polyfill for submitter property of form submit event",
+  "keywords": ["submitter", "submit", "polyfill", "form", "event"],
+  "author": "1101077695@qq.com",
+  "license": "LGPL-3.0",
+  "main": "source/index.js",
+  "homepage": "https://github.com/idea2app/event-submitter-polyfill#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/idea2app/event-submitter-polyfill.git"
+  },
+  "bugs": {
+    "url": "https://github.com/idea2app/event-submitter-polyfill/issues"
+  }
+}
