@@ -4,44 +4,46 @@
  * Secondary authors: lingziyb & TechQuery
  */
 
-declare global {
-    interface Event {
-        submitter?: HTMLInputElement | HTMLButtonElement;
-    }
-}
+export type ButtonElement = HTMLInputElement | HTMLButtonElement;
 
 export const SubmitableButton =
     'button, input[type="button"], input[type="submit"], input[type="image"]';
 
-var last_button: HTMLButtonElement | undefined;
+var last_button: ButtonElement | undefined;
 
 document.addEventListener(
     'click',
-    event => {
-        last_button = (event.target as Element).closest?.<HTMLButtonElement>(
+    event =>
+        (last_button = (event.target as Element).closest?.<ButtonElement>(
             SubmitableButton
-        );
-    },
+        )),
     true
 );
 
 document.addEventListener(
     'submit',
-    function (event) {
-        if ('submitter' in event) return;
+    event => {
+        if (last_button && event.submitter) return;
 
-        const form = event.target as HTMLFormElement,
-            canditates = [document.activeElement, last_button];
-        last_button = undefined;
+        Object.defineProperty(Object.getPrototypeOf(event), 'submitter', {
+            configurable: true,
+            enumerable: true,
+            get(this: SubmitEvent) {
+                const form = this.target as HTMLFormElement,
+                    canditates = [document.activeElement, last_button];
 
-        for (const control of canditates)
-            if (
-                control?.matches(SubmitableButton) &&
-                form === (control as HTMLButtonElement).form
-            )
-                return (event.submitter = control as HTMLButtonElement);
+                for (const control of canditates)
+                    if (
+                        control?.matches(SubmitableButton) &&
+                        form === (control as HTMLButtonElement).form
+                    )
+                        return control as ButtonElement;
 
-        event.submitter = form.querySelector(SubmitableButton);
+                return form.querySelector<ButtonElement>(SubmitableButton);
+            }
+        });
     },
     true
 );
+
+document.addEventListener('submit', () => (last_button = undefined));

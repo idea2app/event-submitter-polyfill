@@ -2,7 +2,7 @@
 
 A polyfill for [`submitter` property of `<form />` Submit Event][1], which is written in [TypeScript][2].
 
-[![NPM Dependency](https://david-dm.org/idea2app/event-submitter-polyfill.svg)][3]
+[![CI & CD](https://github.com/idea2app/event-submitter-polyfill/actions/workflows/main.yml/badge.svg)][3]
 [![](https://data.jsdelivr.com/v1/package/npm/event-submitter-polyfill/badge?style=rounded)][4]
 
 [![NPM](https://nodei.co/npm/event-submitter-polyfill.png?downloads=true&downloadRank=true&stars=true)][5]
@@ -19,12 +19,8 @@ import 'event-submitter-polyfill';
 
 ```html
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/event-submitter-polyfill@0.2.3/dist/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/event-submitter-polyfill"></script>
 </head>
-```
-
-```typescript
-import type {} from 'event-submitter-polyfill';
 ```
 
 ## Usage
@@ -84,16 +80,16 @@ render(
 
 ## Roadmap
 
--   [ ] [`SubmitEvent` class in TypeScript][7]
+-   [x] [`SubmitEvent` class in TypeScript][6]
 
 ## Acknowledge
 
-We rewrite the source code based on [Tobias Buschor's answer in StackOverflow][6].
+We rewrite the source code based on [Tobias Buschor's answer in StackOverflow][7].
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/API/SubmitEvent/submitter
 [2]: https://www.typescriptlang.org/
-[3]: https://david-dm.org/idea2app/event-submitter-polyfill
+[3]: https://github.com/idea2app/event-submitter-polyfill/actions/workflows/main.yml
 [4]: https://www.jsdelivr.com/package/npm/event-submitter-polyfill
 [5]: https://nodei.co/npm/event-submitter-polyfill/
-[6]: https://stackoverflow.com/a/61110260
-[7]: https://github.com/microsoft/TypeScript/issues/40811
+[6]: https://github.com/microsoft/TypeScript/issues/40811
+[7]: https://stackoverflow.com/a/61110260
