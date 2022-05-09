@@ -9,7 +9,7 @@ export type ButtonElement = HTMLInputElement | HTMLButtonElement;
 export const SubmitableButton =
     'button, input[type="button"], input[type="submit"], input[type="image"]';
 
-var last_button: ButtonElement | undefined;
+var last_button: ButtonElement | null;
 
 document.addEventListener(
     'click',
@@ -39,7 +39,7 @@ document.addEventListener(
                     )
                         return control as ButtonElement;
 
-                return form.querySelector<ButtonElement>(SubmitableButton);
+                return null;
             }
         });
     },
