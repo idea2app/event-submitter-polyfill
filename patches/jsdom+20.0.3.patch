@@ -1,0 +1,13 @@
+diff --git a/node_modules/jsdom/lib/jsdom/living/nodes/HTMLInputElement-impl.js b/node_modules/jsdom/lib/jsdom/living/nodes/HTMLInputElement-impl.js
+index 2087807..0de3afe 100644
+--- a/node_modules/jsdom/lib/jsdom/living/nodes/HTMLInputElement-impl.js
++++ b/node_modules/jsdom/lib/jsdom/living/nodes/HTMLInputElement-impl.js
+@@ -200,7 +200,7 @@ class HTMLInputElementImpl extends HTMLElementImpl {
+         fireAnEvent("input", this, undefined, { bubbles: true });
+         fireAnEvent("change", this, undefined, { bubbles: true });
+       }
+-    } else if (form && this.type === "submit") {
++    } else if (form && (this.type === "submit" || this.type === "image")) {
+       form._doRequestSubmit(this);
+     } else if (form && this.type === "reset") {
+       form._doReset();
