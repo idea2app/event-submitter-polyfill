@@ -39,6 +39,7 @@ build/Release
 
 # Dependency files
 package-lock.json
+yarn.lock
 node_modules/
 jspm_packages/
 
@@ -103,3 +104,7 @@ dist
 
 # TernJS port file
 .tern-port
+
+# IDE configuration
+.vscode/settings.json
+.idea/
