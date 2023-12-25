@@ -19,7 +19,7 @@ import 'event-submitter-polyfill';
 
 ```html
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/event-submitter-polyfill"></script>
+    <script src="https://polyfill.web-cell.dev/feature/EventSubmitter.js"></script>
 </head>
 ```
 
