@@ -5,12 +5,13 @@ import '..';
 const form = document.createElement('form');
 let submitEvent: SubmitEvent | null = null;
 let submitter: HTMLElement | null = null;
-form.addEventListener('submit', e => {
-    e.preventDefault();
-    submitEvent = e;
-    submitter = e.submitter;
+
+form.addEventListener('submit', event => {
+    event.preventDefault();
+    submitEvent = event;
+    submitter = event.submitter;
 });
-document.body.appendChild(form);
+document.body.append(form);
 
 function setFormContents(contents: string): HTMLElement {
     form.innerHTML = contents;
