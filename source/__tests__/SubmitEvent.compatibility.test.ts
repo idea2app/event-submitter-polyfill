@@ -1,10 +1,11 @@
 interface SubmitEventInit extends EventInit {
-  submitter?: HTMLElement | null;
+  submitter: HTMLElement | null;
 }
 
 globalThis.SubmitEvent = class SubmitEvent extends Event {
   get submitter() { return null };
-  constructor(type: string, eventInitDict?: SubmitEventInit | undefined) {
+
+  constructor(type: string, eventInitDict?: SubmitEventInit) {
     super(type, eventInitDict);
   }
 }
