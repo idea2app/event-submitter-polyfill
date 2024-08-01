@@ -2,8 +2,11 @@
     "compilerOptions": {
         "strict": true,
         "module": "UMD",
+        "moduleResolution": "Node",
         "declaration": true,
-        "outDir": "dist/"
+        "outDir": "dist/",
+        "esModuleInterop": true,
+        "lib": ["ESNext", "DOM"]
     },
     "include": ["source/*"]
 }
