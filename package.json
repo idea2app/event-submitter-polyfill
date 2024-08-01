@@ -27,10 +27,19 @@
         "url": "https://github.com/idea2app/event-submitter-polyfill/issues"
     },
     "devDependencies": {
-        "husky": "^8.0.3",
-        "lint-staged": "^15.2.0",
-        "prettier": "^3.1.1",
-        "typescript": "~5.3.3"
+        "@jest/globals": "^29.7.0",
+        "husky": "^9.1.4",
+        "jest": "^29.7.0",
+        "jest-environment-jsdom": "^29.7.0",
+        "lint-staged": "^15.2.7",
+        "patch-package": "^6.5.1",
+        "postinstall-postinstall": "^2.1.0",
+        "prettier": "^3.3.3",
+        "ts-jest": "^29.2.4",
+        "typescript": "^5.5.4"
+    },
+    "resolutions": {
+        "jsdom": "20.0.3"
     },
     "prettier": {
         "singleQuote": true,
@@ -43,7 +52,7 @@
     },
     "scripts": {
         "prepare": "husky install",
-        "test": "lint-staged",
+        "test": "jest && lint-staged",
         "build": "tsc",
         "prepublishOnly": "npm test  &&  npm run build"
     }
