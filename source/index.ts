@@ -7,45 +7,48 @@
 export type ButtonElement = HTMLInputElement | HTMLButtonElement;
 
 export const SubmitableButton =
-    'button, input[type="button"], input[type="submit"], input[type="image"]';
+  'button, input[type="button"], input[type="submit"], input[type="image"]';
 
-var last_button: ButtonElement | null | undefined;
+var last_buttons: ButtonElement[] = [];
+
+function capturer(event: KeyboardEvent | MouseEvent) {
+  const button =
+    event.target instanceof Element &&
+    event.target.closest<ButtonElement>(SubmitableButton);
+
+  if (
+    button &&
+    button.form &&
+    (event instanceof MouseEvent || event.key === 'Enter' || event.key === ' ')
+  )
+    last_buttons.push(button);
+}
+
+function definer(event: Event) {
+  const submitter = last_buttons.find(button => button.form === event.target);
+
+  if (submitter)
+    last_buttons = last_buttons.filter(button => button !== submitter);
+
+  Object.defineProperty(event, 'submitter', {
+    configurable: true,
+    enumerable: true,
+    get: () => submitter || null
+  });
+}
 
 if (typeof document !== 'undefined' && typeof SubmitEvent !== 'function') {
-    document.addEventListener(
-        'click',
-        event =>
-            (last_button = (event.target as Element).closest?.<ButtonElement>(
-                SubmitableButton
-            )),
-        true
-    );
+  const { preventDefault } = Event.prototype;
 
-    document.addEventListener(
-        'submit',
-        event => {
-            if (last_button && event.submitter) return;
+  Event.prototype.preventDefault = function () {
+    if (this instanceof KeyboardEvent || this instanceof MouseEvent) {
+      const submitter = (this.target as Element).closest(SubmitableButton);
+      last_buttons = last_buttons.filter(button => button !== submitter);
+    }
+    return preventDefault.call(this);
+  };
 
-            Object.defineProperty(Object.getPrototypeOf(event), 'submitter', {
-                configurable: true,
-                enumerable: true,
-                get(this: SubmitEvent) {
-                    const form = this.target as HTMLFormElement,
-                        canditates = [document.activeElement, last_button];
-
-                    for (const control of canditates)
-                        if (
-                            control?.matches(SubmitableButton) &&
-                            form === (control as HTMLButtonElement).form
-                        )
-                            return control as ButtonElement;
-
-                    return null;
-                }
-            });
-        },
-        true
-    );
-
-    document.addEventListener('submit', () => (last_button = undefined));
+  document.addEventListener('click', capturer, true);
+  document.addEventListener('keyup', capturer, true);
+  document.addEventListener('submit', definer, true);
 }
